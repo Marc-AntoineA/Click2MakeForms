@@ -1,0 +1,77 @@
+:root {
+  --background-color:#CEE3F6;
+  --border-color: #151515;
+  --background-color-dark: #2E64FE;
+}
+
+button {
+  background-color: Transparent;
+  border: None;
+}
+
+.question-box {
+  padding:5px;
+  background-color: var(--background-color);
+  border-style: solid;
+  border-radius: 5px;
+  border-color: var(--border-color);
+  max-width: 80%;
+  margin:10px;
+}
+
+.choice {
+  max-width: 96%;
+  margin-left: 2%;
+}
+
+.toolbar{
+  border-width: thin;
+}
+
+.toolbar-up {
+  border-bottom: dashed;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+  border-width: thin;
+}
+
+.toolbar-bottom {
+  border-top: dashed;
+  padding-top: 5px;
+  margin-top: 5px;
+  border-width: thin;
+}
+
+.label {
+  font-size: 22px;
+  font-weight: bold;
+  width: calc(80% - 20px);
+}
+
+.sub-label {
+  font-size: 17px;
+  width: 80%;
+}
+
+.legend {
+  font-size: 10px;
+  font-weight:bold;
+  margin-bottom: 0px;
+}
+
+.margin-left {
+  margin-left: 15px;
+}
+
+input, select {
+  font-size: 14px;
+  font-weight:bold;
+  padding: 3px;
+  background-color: Transparent;
+  border: None;
+}
+
+.icon {
+  width: 12px;
+  height: 12px;
+}
