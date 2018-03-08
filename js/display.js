@@ -25,6 +25,8 @@ function layout_toolbar_up(){
   var icon_arrow_up = document.createElement("IMG");
   icon_arrow_up.src = "icons/arrow-up.png";
   icon_arrow_up.className = "icon";
+  icon_arrow_up.setAttribute("data-toggle", "tooltip");
+  icon_arrow_up.setAttribute("title", "Déplacer cette question vers le haut");
   move_up_button.appendChild(icon_arrow_up);
   toolbar.appendChild(move_up_button);
 
@@ -93,7 +95,7 @@ function layout_label_question(label_str, sub = false){
   return container;
 }
 
-function layout_middle_toolbar(obligatory_bool, type_question){
+function layout_middle_toolbar(obligatory_bool, type_question, form){
     var toolbar = document.createElement("DIV");
     toolbar.className = "toolbar";
 
@@ -141,7 +143,6 @@ function layout_middle_toolbar(obligatory_bool, type_question){
       option5.value = "inline";
       if(type_question == "inline"){
         option5.selected = "selected";
-          console.log("y");
       }
       option5.innerHTML = "Texte court";
       select.appendChild(option5);
@@ -154,6 +155,7 @@ function layout_middle_toolbar(obligatory_bool, type_question){
     checkbox.id = "obligatory";
     checkbox.className = "obligatory";
     checkbox.type = "checkbox";
+    checkbox.setAttribute("onclick", "event_obligatory(this, form)");
 
     if(obligatory_bool){
       checkbox.checked = "checked";
@@ -172,12 +174,15 @@ function layout_question(questions, id){
 
   var question_box = document.createElement("DIV");
   question_box.className = "question-box";
+  if(question.obligatory){
+    question_box.classList.add("question-box-obligatory");
+  }
   question_box.id = id;
 
   const toolbar_up_box = layout_toolbar_up();
   const label_box = layout_label_question(question.label);
   const toolbar_middle_box = layout_middle_toolbar(
-    question.obligatory, question.type_question);
+    question.obligatory, question.type_question, questions);
   const toolbar_down_box = layout_toolbar_down();
   question_box.appendChild(toolbar_up_box);
   question_box.appendChild(label_box);
@@ -192,7 +197,7 @@ function layout_question(questions, id){
   if (question.type_question == "select" ||
         question.type_question == "selectOne"){
     const choices = question.type_data.split(";");
-    const type_data_box = layout_choices(choices, question.subs);
+    const type_data_box = layout_choices(choices, question.subs, questions);
     question_box.appendChild(type_data_box);
   }
 
@@ -230,11 +235,11 @@ function layout_number(minimum, maximum){
   return container;
 }
 
-function layout_choices(choices, subs){
+function layout_choices(choices, subs, form){
   var container = document.createElement("DIV");
   container.className = "type-data";
   for(var i = 0; i < choices.length; i++){
-    const choice_box = layout_choice(choices, subs, i);
+    const choice_box = layout_choice(choices, subs, i, form);
     container.appendChild(choice_box);
   }
 
@@ -308,7 +313,7 @@ function layout_choice_label(label){
     return container;
 }
 
-function layout_choice(choices, subs, i){
+function layout_choice(choices, subs, i, form){
     const choice = choices[i];
     var container = document.createElement("DIV");
     container.className = "question-box choice";
@@ -327,8 +332,10 @@ function layout_choice(choices, subs, i){
       const conditionnal_block = layout_conditionnal_question(true);
       const conditionnal_question = subs[j];
       const question_label_box = layout_label_question(conditionnal_question.label, true);
-      const type_question_box = layout_middle_toolbar(conditionnal_question.obligatory, conditionnal_question.type_question)
-
+      const type_question_box = layout_middle_toolbar(conditionnal_question.obligatory, conditionnal_question.type_question, form)
+      if (conditionnal_question.obligatory){
+        container.classList.add("question-box-obligatory");
+      }
       container.appendChild(conditionnal_block);
       container.appendChild(question_label_box);
       container.appendChild(type_question_box);

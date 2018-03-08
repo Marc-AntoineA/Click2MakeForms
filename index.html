@@ -49,136 +49,43 @@
     <div class="container-fluid">
       <div class="row">
         <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
+          <div class="toolbar-nav">
+            <button type="button" data-toggle="tooltip" title="Enregistrer le questionnaire">
+              <img src="icons/save.png" class="icon"/>
+            </button>
 
-          </ul>
+            <button type="button" data-toggle="tooltip" title="Créer une copie de ce questionnaire">
+              <img src="icons/copy.png" class="icon"/>
+            </button>
+
+            <button type="button" data-toggle="tooltip" title="Ajouter une question (à la fin)">
+              <img src="icons/delete.png" class="icon"/>
+            </button>
+
+            <button type="button" data-toggle="tooltip" title="Supprimer ce questionnaire">
+              <img src="icons/add.png" class="icon"/>
+            </button>
+          </div>
         </nav>
 
         <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
           <h1> Gestion des questionnaires </h1>
-          <h2> Modification du questionnaire <span id="form_label">Classique</span> </h2>
+          <span id="form-label">Classique</span>
+
+
+          <div>
+            <label class="legend"> Titre du questionnaire : </label>
+            <input type="text" class ="label" value = "Classique">
+          </div>
+
+          <div>
+            <label class="legend align-up">Courte description</label>
+            <textarea class="description">Ceci est le questionnaire d'évaluation des cours. Cette information n'est pas encore connue...</textarea>
+          </div>
+
 
           <div id="form">
-            <div id="01" class="question-box">
-              <!-- Toolbar up : arrow up, add up, delete -->
-
-              <label class="legend"> Intitulé de la question </label>
-              <input type="text" class="label" value="Exemple de question texte ou inline"></input>
-
-              <!-- Toolbar middle : type_question and checkbox for mandatory question -->
-              <div class="toolbar">
-                <label class="legend"> Type de la question </label>
-                <select name="type_question" size="1">
-                 <option value="selectOne">Question à choix unique</option>
-                 <option value="select">Question à choix multiples</option>
-                 <option value="number">Nombre</option>
-                 <option value="text">Texte libre</option>
-                 <option value="inline">Texte court</option>
-                </select>
-                <label class="legend margin-left">Question obligatoire ? </label>
-                <input id="obligatory" class="obligatory" type="checkbox">
-              </div>
-
-              <div class="type-data">
-
-              </div>
-
-              <!-- Toolbar bottom : arrow down, add down, delete -->
-              <div class="toolbar-bottom">
-                <button type="button"><img src="icons/arrow-down.png" height="12" width="12"/></button>
-                <button type="button"><img src="icons/add.png" height="12" width="12"/></button>
-                <button type="button"><img src="icons/delete.png" height="12" width="12"/></button>
-              </div>
-            </div>
-
-
-            <div id="02" class="question-box">
-
-
-              <div class="type-data">
-                  <div class="question-box choice">
-                    <div class="toolbar-up">
-                      <button type="button"><img src="icons/arrow-up.png" height="12" width="12"/></button>
-                      <button type="button"><img src="icons/arrow-down.png" height="12" width="12"/></button>
-                      <button type="button"><img src="icons/add.png" height="12" width="12"/></button>
-                      <button type="button"><img src="icons/delete.png" height="12" width="12"/></button>
-                      <label class="legend">Question conditionnelle ?</label>
-                      <input id="sub-question" class="sub-question" type="checkbox">
-                    </div>
-
-                    <label class="legend">Réponse</label>
-                    <input type="text" class="label sub-label" value="Choice 1"></input>
-                  </div>
-
-                  <div class="question-box choice">
-                    <div class="toolbar-up">
-                      <button type="button"><img src="icons/arrow-up.png" height="12" width="12"/></button>
-                      <button type="button"><img src="icons/arrow-down.png" height="12" width="12"/></button>
-                      <button type="button"><img src="icons/add.png" height="12" width="12"/></button>
-                      <button type="button"><img src="icons/delete.png" height="12" width="12"/></button>
-                      <label class="legend">Question conditionnelle ?</label>
-                      <input id="sub-question" class="sub-question" type="checkbox">
-                    </div>
-
-                    <label class="legend">Réponse</label>
-                    <input type="text" class="label sub-label" value="Exemple de question nombre"></input>
-                    <div class="toolbar">
-                      <label class="legend"> Type de la question </label>
-                      <select name="type_question" size="1">
-                       <option value="selectOne">Question à choix unique</option>
-                       <option value="select">Question à choix multiples</option>
-                       <option value="number">Nombre</option>
-                       <option value="text">Texte libre</option>
-                       <option value="inline">Texte court</option>
-                      </select>
-                      <label class="legend margin-left">Question obligatoire ? </label>
-                      <input id="obligatory" class="obligatory" type="checkbox">
-                    </div>
-                    <div class="type-data">
-                      <label class="legend">Borne inférieure : </label>
-                      <input id="min" type="number"></input>
-                      <label class="legend">Borne supérieure : </label>
-                      <input id="max" type="number"></input>
-                    </div>
-                  </div>
-
-                  <div class="question-box choice">
-                    <div class="toolbar-up">
-                      <button type="button"><img src="icons/arrow-up.png" height="12" width="12"/></button>
-                      <button type="button"><img src="icons/arrow-down.png" height="12" width="12"/></button>
-                      <button type="button"><img src="icons/add.png" height="12" width="12"/></button>
-                      <button type="button"><img src="icons/delete.png" height="12" width="12"/></button>
-                      <label class="legend">Question conditionnelle ?</label>
-                      <input id="sub-question" class="sub-question" type="checkbox">
-                    </div>
-
-                    <label class="legend">Réponse</label>
-                    <input type="text" class="label sub-label" value="Choice 3"></input>
-                    <div class="toolbar">
-                      <label class="legend"> Type de la question </label>
-                      <select name="type_question" size="1">
-                       <option value="selectOne">Question à choix unique</option>
-                       <option value="select">Question à choix multiples</option>
-                       <option value="number">Nombre</option>
-                       <option value="text">Texte libre</option>
-                       <option value="inline">Texte court</option>
-                      </select>
-                      <label class="legend margin-left">Question obligatoire ? </label>
-                      <input id="obligatory" class="obligatory" type="checkbox">
-                    </div>
-
-                    <ul>
-                      <li>Choix 1</li>
-                      <li>Choix 2</li>
-                  </div>
-              </div>
-
-              <!-- Toolbar bottom : arrow down, add down, delete -->
-              <div class="toolbar toolbar-bottom">
-                <button type="button"><img src="icons/arrow-down.png" height="12" width="12"/></button>
-                <button type="button"><img src="icons/add.png" height="12" width="12"/></button>
-                <button type="button"><img src="icons/delete.png" height="12" width="12"/></button>
-              </div>
-            </div>
+          </div>
 
           </div>
         </main>
@@ -193,7 +100,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
     <script src="js/request.js"></script>
     <script src="js/display.js"></script>
-
+    <script src="js/edit_question.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>
