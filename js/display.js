@@ -105,6 +105,7 @@ function layout_middle_toolbar(obligatory_bool, type_question, form){
 
     var select = document.createElement("SELECT");
     select.name = "type_question";
+    select.setAttribute("oninput", "event_type_question(this)");
     select.size = "1";
     //-- Values
       var option1 = document.createElement("OPTION");
@@ -155,7 +156,7 @@ function layout_middle_toolbar(obligatory_bool, type_question, form){
     checkbox.id = "obligatory";
     checkbox.className = "obligatory";
     checkbox.type = "checkbox";
-    checkbox.setAttribute("onclick", "event_obligatory(this, form)");
+    checkbox.setAttribute("onclick", "event_obligatory(this)");
 
     if(obligatory_bool){
       checkbox.checked = "checked";
@@ -187,22 +188,39 @@ function layout_question(questions, id){
   question_box.appendChild(toolbar_up_box);
   question_box.appendChild(label_box);
   question_box.appendChild(toolbar_middle_box);
-
-  if(question.type_question == "number"){
-    const type_data = question.type_data.split(";");
-    const type_data_box = layout_number(type_data[0], type_data[1]);
-    question_box.appendChild(type_data_box);
-  }
-
-  if (question.type_question == "select" ||
-        question.type_question == "selectOne"){
-    const choices = question.type_data.split(";");
-    const type_data_box = layout_choices(choices, question.subs, questions);
-    question_box.appendChild(type_data_box);
-  }
+  var type_data_box = layout_type_data(question.type_question, question.type_data, question.subs);
+  type_data_box.id = "type-data";
+  question_box.appendChild(type_data_box);
 
   question_box.appendChild(toolbar_down_box);
   return question_box;
+}
+
+function layout_type_data(type_question, type_data, subs){
+  if(type_question == "number"){
+
+    if(type_data == ""){
+      return layout_number(0, 100);
+    }else{
+      const type_data_s = type_data.split(";");
+      return layout_number(type_data_s[0], type_data_s[1]);
+    }
+  }
+
+  if (type_question == "select" ||
+        type_question == "selectOne"){
+    if(type_data == ""){
+      return layout_choices([], []);
+    }else{
+      const choices = type_data.split(";");
+      const type_data_box = layout_choices(choices, subs);
+      return type_data_box;
+    }
+  }
+
+  const type_data_box = document.createElement("DIV");
+  type_data_box.className = "type-data";
+  return type_data_box;
 }
 
 function layout_number(minimum, maximum){
@@ -235,11 +253,11 @@ function layout_number(minimum, maximum){
   return container;
 }
 
-function layout_choices(choices, subs, form){
+function layout_choices(choices, subs){
   var container = document.createElement("DIV");
   container.className = "type-data";
   for(var i = 0; i < choices.length; i++){
-    const choice_box = layout_choice(choices, subs, i, form);
+    const choice_box = layout_choice(choices, subs, i);
     container.appendChild(choice_box);
   }
 
@@ -313,7 +331,7 @@ function layout_choice_label(label){
     return container;
 }
 
-function layout_choice(choices, subs, i, form){
+function layout_choice(choices, subs, i){
     const choice = choices[i];
     var container = document.createElement("DIV");
     container.className = "question-box choice";
