@@ -101,3 +101,31 @@ function event_add_question(button, above, sub){
     form.insertBefore(question_box, new_question_box);
   }
 }
+
+function event_add_choice(button) {
+  // Add a blank choice for select and selectOne
+
+  const form = button.parentNode.nextElementSibling;
+  const new_question_box = layout_choice(["Votre réponse"], [], 0);
+  form.appendChild(new_question_box);
+}
+
+function event_add_question(button) {
+  // Add a blank question
+
+  const form = document.getElementById("form");
+  const blank_questions = [{
+    id: 1,
+    isSub: false,
+    label: "Votre question",
+    obligatory: false,
+    parentsQuestionsValue: 0,
+    parentsQuestionPosition: 0,
+    position: "0",
+    subs: [],
+    type_data: "",
+    type_question: "selectOne"
+  }];
+  const new_question_box = layout_question(blank_questions, 0);
+  form.appendChild(new_question_box);
+}

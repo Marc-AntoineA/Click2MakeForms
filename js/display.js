@@ -204,13 +204,19 @@ function layout_type_data(type_question, type_data, subs){
 
   if (type_question == "select" ||
         type_question == "selectOne"){
+    var form_type_data_box;
     if(type_data == ""){
-      return layout_choices([], []);
+      form_type_data_box = layout_choices([], []);
+
     }else{
       const choices = type_data.split(";");
-      const type_data_box = layout_choices(choices, subs);
-      return type_data_box;
+      form_type_data_box = layout_choices(choices, subs);
     }
+    const type_data_box = document.createElement("DIV");
+    const add_button_choice = layout_add_button_choice();
+    type_data_box.appendChild(add_button_choice);
+    type_data_box.appendChild(form_type_data_box);
+    return type_data_box;
   }
 
   const type_data_box = document.createElement("DIV");
@@ -383,6 +389,21 @@ function layout_conditional_question(conditional_bool){
   }
   checkbox.setAttribute("onclick", "event_conditional(this)");
   container.appendChild(checkbox);
+
+  return container;
+}
+
+function layout_add_button_choice(){
+  var container = document.createElement("DIV");
+  container.className = "toolbar";
+
+  var add_button = document.createElement("BUTTON");
+  var icon_add = document.createElement("IMG");
+  icon_add.src = "icons/add.png";
+  icon_add.className = "icon";
+  add_button.setAttribute("onclick", "event_add_choice(this)");
+  add_button.appendChild(icon_add);
+  container.appendChild(add_button);
 
   return container;
 }
