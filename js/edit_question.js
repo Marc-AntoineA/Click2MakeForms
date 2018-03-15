@@ -42,3 +42,62 @@ function event_type_question(select_node, position){
   const new_type_data_box = layout_type_data(select_node.value, "", []);
   question_box.replaceChild(new_type_data_box, question_box.children[position]);
 }
+
+function event_move_question(button, up){
+  // Up == True if up, else down
+
+  const question_box = button.parentNode.parentNode;
+  const form = question_box.parentNode;
+  if (up){
+    const previous = question_box.previousElementSibling;
+    if(previous){
+      form.insertBefore(question_box, previous);
+    }
+  }else{
+    const next = question_box.nextElementSibling;
+    if(next){
+      form.insertBefore(next, question_box);
+    }
+  }
+}
+
+function event_delete_question(button){
+  // Remove a question_box
+
+  const question_box = button.parentNode.parentNode;
+  const form = question_box.parentNode;
+  form.removeChild(question_box);
+}
+
+function event_add_question(button, above, sub){
+  // Add a question above if above, else bellow
+  const question_box = button.parentNode.parentNode;
+  const form = question_box.parentNode;
+
+  var new_question_box;
+
+  if(!sub){
+    const blank_questions = [{
+      id: 1,
+      isSub: false,
+      label: "Votre question",
+      obligatory: false,
+      parentsQuestionsValue: 0,
+      parentsQuestionPosition: 0,
+      position: "0",
+      subs: [],
+      type_data: "",
+      type_question: "selectOne"
+    }];
+    new_question_box = layout_question(blank_questions, 0);
+  }else{
+    new_question_box = layout_choice(["Votre réponse"], [], 0);
+  }
+
+  if (above){
+    form.insertBefore(new_question_box, question_box);
+  }else{
+    form.insertBefore(new_question_box, question_box);
+    form.insertBefore(question_box, new_question_box);
+  }
+}

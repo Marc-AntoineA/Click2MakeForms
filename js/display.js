@@ -11,6 +11,7 @@ function layout_toolbar_up(){
   icon_arrow_up.className = "icon";
   icon_arrow_up.setAttribute("data-toggle", "tooltip");
   icon_arrow_up.setAttribute("title", "Déplacer cette question vers le haut");
+  move_up_button.setAttribute("onclick", "event_move_question(this, true)");
   move_up_button.appendChild(icon_arrow_up);
   toolbar.appendChild(move_up_button);
 
@@ -18,6 +19,7 @@ function layout_toolbar_up(){
   var icon_add = document.createElement("IMG");
   icon_add.src = "icons/add.png";
   icon_add.className = "icon";
+  add_button.setAttribute("onclick", "event_add_question(this, true, false)");
   add_button.appendChild(icon_add);
   toolbar.appendChild(add_button);
 
@@ -25,6 +27,7 @@ function layout_toolbar_up(){
   var icon_delete = document.createElement("IMG");
   icon_delete.src = "icons/delete.png";
   icon_delete.className = "icon";
+  delete_button.setAttribute("onclick", "event_delete_question(this)");
   delete_button.appendChild(icon_delete);
   toolbar.appendChild(delete_button);
 
@@ -40,12 +43,14 @@ function layout_toolbar_down(){
   icon_arrow_up.src = "icons/arrow-down.png";
   icon_arrow_up.className = "icon";
   move_up_button.appendChild(icon_arrow_up);
+  move_up_button.setAttribute("onclick", "event_move_question(this, false)");
   toolbar.appendChild(move_up_button);
 
   var add_button = document.createElement("BUTTON");
   var icon_add = document.createElement("IMG");
   icon_add.src = "icons/add.png";
   icon_add.className = "icon";
+  add_button.setAttribute("onclick", "event_add_question(this, false, false)");
   add_button.appendChild(icon_add);
   toolbar.appendChild(add_button);
 
@@ -53,6 +58,7 @@ function layout_toolbar_down(){
   var icon_delete = document.createElement("IMG");
   icon_delete.src = "icons/delete.png";
   icon_delete.className = "icon";
+  delete_button.setAttribute("onclick", "event_delete_question(this)");
   delete_button.appendChild(icon_delete);
   toolbar.appendChild(delete_button);
 
@@ -277,12 +283,14 @@ function layout_toolbar_choice(conditional_bool){
   icon_arrow_up.src = "icons/arrow-up.png";
   icon_arrow_up.className = "icon";
   move_up_button.appendChild(icon_arrow_up);
+  move_up_button.setAttribute("onclick", "event_move_question(this, true)");
   toolbar.appendChild(move_up_button);
 
   var move_down_button = document.createElement("BUTTON");
   var icon_arrow_down = document.createElement("IMG");
   icon_arrow_down.src = "icons/arrow-down.png";
   icon_arrow_down.className = "icon";
+  move_down_button.setAttribute("onclick", "event_move_question(this, false)");
   move_down_button.appendChild(icon_arrow_down);
   toolbar.appendChild(move_down_button);
 
@@ -290,6 +298,7 @@ function layout_toolbar_choice(conditional_bool){
   var icon_add = document.createElement("IMG");
   icon_add.src = "icons/add.png";
   icon_add.className = "icon";
+  add_button.setAttribute("onclick", "event_add_question(this, false, true)");
   add_button.appendChild(icon_add);
   toolbar.appendChild(add_button);
 
@@ -297,6 +306,7 @@ function layout_toolbar_choice(conditional_bool){
   var icon_delete = document.createElement("IMG");
   icon_delete.src = "icons/delete.png";
   icon_delete.className = "icon";
+  delete_button.setAttribute("onclick", "event_delete_question(this)");
   delete_button.appendChild(icon_delete);
   toolbar.appendChild(delete_button);
 
