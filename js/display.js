@@ -1,21 +1,5 @@
 'use strict'
 
-// Display a new question (first time)
-function display_new_question(q){
-
-  var question = document.createElement("DIV");
-  var label = document.createElement("H4");
-  label.innerHTML = q.label;
-
-
-
-
-  var question = document.createElement("h2");
-  question.innerHTML = q.label;
-
-  form_place.appendChild(question);
-}
-
 // arrow-up, add, delete
 function layout_toolbar_up(){
   var toolbar = document.createElement("DIV");
@@ -95,7 +79,7 @@ function layout_label_question(label_str, sub = false){
   return container;
 }
 
-function layout_middle_toolbar(obligatory_bool, type_question, form){
+function layout_middle_toolbar(obligatory_bool, type_question, isSub){
     var toolbar = document.createElement("DIV");
     toolbar.className = "toolbar";
 
@@ -105,7 +89,12 @@ function layout_middle_toolbar(obligatory_bool, type_question, form){
 
     var select = document.createElement("SELECT");
     select.name = "type_question";
-    select.setAttribute("oninput", "event_type_question(this)");
+    if(isSub){
+      select.setAttribute("oninput", "event_type_question(this, 5)");
+    }else{
+      select.setAttribute("oninput", "event_type_question(this, 3)");
+    }
+
     select.size = "1";
     //-- Values
       var option1 = document.createElement("OPTION");
@@ -183,7 +172,7 @@ function layout_question(questions, id){
   const toolbar_up_box = layout_toolbar_up();
   const label_box = layout_label_question(question.label);
   const toolbar_middle_box = layout_middle_toolbar(
-    question.obligatory, question.type_question, questions);
+    question.obligatory, question.type_question, question.isSub);
   const toolbar_down_box = layout_toolbar_down();
   question_box.appendChild(toolbar_up_box);
   question_box.appendChild(label_box);
@@ -279,7 +268,7 @@ function layout_choice_sub(choices){
   return container;
 }
 
-function layout_toolbar_choice(conditionnal_bool){
+function layout_toolbar_choice(conditional_bool){
   var toolbar = document.createElement("DIV");
   toolbar.className = "toolbar";
 
@@ -347,38 +336,42 @@ function layout_choice(choices, subs, i){
       j++;
     }
     if(j < subs.length){
-      const conditionnal_block = layout_conditionnal_question(true);
-      const conditionnal_question = subs[j];
-      const question_label_box = layout_label_question(conditionnal_question.label, true);
-      const type_question_box = layout_middle_toolbar(conditionnal_question.obligatory, conditionnal_question.type_question, form)
-      if (conditionnal_question.obligatory){
+      const conditional_block = layout_conditional_question(true);
+      const conditional_question = subs[j];
+      const question_label_box = layout_label_question(conditional_question.label, true);
+      const type_question_box = layout_middle_toolbar(conditional_question.obligatory,
+        conditional_question.type_question, conditional_question.isSub);
+      const type_data_box = layout_type_data(conditional_question.type_question, "", []);
+      if (conditional_question.obligatory){
         container.classList.add("question-box-obligatory");
       }
-      container.appendChild(conditionnal_block);
+      container.appendChild(conditional_block);
       container.appendChild(question_label_box);
       container.appendChild(type_question_box);
+      container.appendChild(type_data_box);
     }else{
-      const conditionnal_block = layout_conditionnal_question(false);
-      container.appendChild(conditionnal_block);
+      const conditional_block = layout_conditional_question(false);
+      container.appendChild(conditional_block);
     }
     return container;
 }
 
-function layout_conditionnal_question(conditionnal_bool){
+function layout_conditional_question(conditional_bool){
   var container = document.createElement("DIV");
 
-  var conditionnal_label = document.createElement("LABEL");
-  conditionnal_label.className = "legend";
-  conditionnal_label.innerHTML = "Question conditionnelle ? ";
-  container.appendChild(conditionnal_label);
+  var conditional_label = document.createElement("LABEL");
+  conditional_label.className = "legend";
+  conditional_label.innerHTML = "Question conditionnelle ? ";
+  container.appendChild(conditional_label);
 
   var checkbox = document.createElement("INPUT");
-  checkbox.id = "conditionnal";
-  checkbox.className = "conditionnal";
+  checkbox.id = "conditional";
+  checkbox.className = "conditional";
   checkbox.type = "checkbox";
-  if(conditionnal_bool){
+  if(conditional_bool){
     checkbox.checked = "checked";
   }
+  checkbox.setAttribute("onclick", "event_conditional(this)");
   container.appendChild(checkbox);
 
   return container;
