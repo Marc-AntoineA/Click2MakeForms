@@ -75,7 +75,6 @@ function event_add_question(button, above, sub){
   const form = question_box.parentNode;
 
   var new_question_box;
-
   if(!sub){
     const blank_questions = [{
       id: 1,
@@ -98,7 +97,7 @@ function event_add_question(button, above, sub){
     form.insertBefore(new_question_box, question_box);
   }else{
     form.insertBefore(new_question_box, question_box);
-    form.insertBefore(question_box, new_question_box);
+    form.insertBefore(new_question_box, question_box);
   }
 }
 
@@ -110,7 +109,7 @@ function event_add_choice(button) {
   form.appendChild(new_question_box);
 }
 
-function event_add_question(button) {
+function event_add_question_end(button) {
   // Add a blank question
 
   const form = document.getElementById("form");
