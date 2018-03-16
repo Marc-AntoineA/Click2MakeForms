@@ -50,7 +50,9 @@
       <div class="row">
         <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
           <div class="toolbar-nav">
-            <button type="button" data-toggle="tooltip" title="Enregistrer le questionnaire">
+            <button type="button" data-toggle="tooltip"
+              title="Enregistrer le questionnaire"
+              onclick="to_json_main()">
               <img src="icons/save.png" class="icon"/>
             </button>
 
@@ -103,6 +105,7 @@
     <script src="js/request.js"></script>
     <script src="js/display.js"></script>
     <script src="js/edit_question.js"></script>
+    <script src="js/dom_to_json.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>
