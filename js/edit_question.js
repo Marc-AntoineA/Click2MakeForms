@@ -72,6 +72,7 @@ function event_delete_question(button){
 function event_add_question(button, above, sub){
   // Add a question above if above, else bellow
   const question_box = button.parentNode.parentNode;
+
   const form = question_box.parentNode;
 
   var new_question_box;
@@ -90,7 +91,11 @@ function event_add_question(button, above, sub){
     }];
     new_question_box = layout_question(blank_questions, 0);
   }else{
-    new_question_box = layout_choice(["Votre réponse"], [], 0);
+    console.log(question_box.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode);
+    new_question_box = layout_choice(["Votre réponse"],
+      [],
+      0,
+      !question_box.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.classList.contains("question-box"));
   }
 
   if (above){
@@ -105,8 +110,15 @@ function event_add_choice(button) {
   // Add a blank choice for select and selectOne
 
   const form = button.parentNode.nextElementSibling;
-  const new_question_box = layout_choice(["Votre réponse"], [], 0);
+  const question_box = form.parentNode.parentNode;
+
+  console.log(question_box.parentNode.parentNode.parentNode);
+  const new_question_box = layout_choice(["Votre réponse"],
+    [],
+    0,
+    !question_box.parentNode.parentNode.parentNode.classList.contains("question-box"));
   form.appendChild(new_question_box);
+
 }
 
 function event_add_question_end(button) {

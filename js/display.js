@@ -258,7 +258,7 @@ function layout_choices(choices, subs){
   var container = document.createElement("DIV");
   container.className = "type-data";
   for(var i = 0; i < choices.length; i++){
-    const choice_box = layout_choice(choices, subs, i);
+    const choice_box = layout_choice(choices, subs, i, true);
     container.appendChild(choice_box);
   }
 
@@ -336,7 +336,7 @@ function layout_choice_label(label){
     return container;
 }
 
-function layout_choice(choices, subs, i){
+function layout_choice(choices, subs, i, cond_enable){
     const choice = choices[i];
     var container = document.createElement("DIV");
     container.className = "question-box choice";
@@ -361,13 +361,17 @@ function layout_choice(choices, subs, i){
       if (conditional_question.obligatory){
         container.classList.add("question-box-obligatory");
       }
-      container.appendChild(conditional_block);
+      if(cond_enable){
+        container.appendChild(conditional_block);
+      }
       container.appendChild(question_label_box);
       container.appendChild(type_question_box);
       container.appendChild(type_data_box);
     }else{
       const conditional_block = layout_conditional_question(false);
+      if(cond_enable){
       container.appendChild(conditional_block);
+      }
     }
     return container;
 }
